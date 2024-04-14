@@ -1,5 +1,6 @@
 package com.example.mealmate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -28,21 +29,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Set up the toolbar
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         // Set up the Navigation Drawer
-        //DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-        //        this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        //drawerLayout.addDrawerListener(toggle);
-        //toggle.syncState();
+        drawerLayout = findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(
+               this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        // Set the title text color for the toolbar
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white);
+
 
         // Set up the NavigationView
-        //NavigationView navigationView = findViewById(R.id.nav_view);
-        //navigationView.setNavigationItemSelectedListener(this::onNavigationItemSelected);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this::onNavigationItemSelected);
 
-        // Set up the RecyclerView
+        //Set up the RecyclerView
         List<CalorieEntry> entries = getCalorieEntriesForDay();
         RecyclerView recyclerView = findViewById(R.id.recyclerViewCalorieEntries);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -60,14 +65,18 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation item clicks here
-        switch (item.getItemId()) {
-            //case R.id.nav_home:
-                // Navigate to Home activity
-                //break;
-            //case R.id.nav_profile:
-                // Navigate to Profile activity
-                //break;
-            // Add more cases for other destinations
+        int itemId = item.getItemId();
+        Intent intent = null;
+        if (itemId == R.id.nav_home) {
+            intent = new Intent(MainActivity.this, MainActivity.class);
+        } else if (itemId == R.id.nav_profile) {
+            intent = new Intent(MainActivity.this, ProfileActivity.class);
+        } else {
+            // Handle other destinations
+        }
+
+        if (intent != null) {
+            startActivity(intent);
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

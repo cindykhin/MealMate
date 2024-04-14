@@ -6,5 +6,14 @@
     <item
         android:id="@+id/nav_profile"
         android:title="Profile" />
+    <item
+        android:id="@+id/nav_list"
+        android:title="Grocery List" />
+    <item
+        android:id="@+id/nav_recipes"
+        android:title="Recipes" />
+    <item
+        android:id="@+id/nav_scanner"
+        android:title="Scan a Product" />
     <!-- Add more menu items for other destinations -->
 </menu>
