@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -15,9 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class GroceriesEntryAdapter extends RecyclerView.Adapter<GroceriesEntryAdapter.ViewHolder> {
+    public interface OnSelectedItemListener {
+        void onItemSelected(boolean anyItemSelected);
+    }
     private ArrayList<GroceriesEntry> entries;
-    public GroceriesEntryAdapter(ArrayList<GroceriesEntry> entries) {
+    private OnSelectedItemListener listener;
+    public GroceriesEntryAdapter(ArrayList<GroceriesEntry> entries, OnSelectedItemListener listener) {
         this.entries = entries;
+        this.listener = listener;
     }
 
     @NonNull
@@ -38,6 +44,21 @@ public class GroceriesEntryAdapter extends RecyclerView.Adapter<GroceriesEntryAd
     @Override
     public int getItemCount() {
         return entries.size();
+    }
+
+    public void notifySelectionChanged() {
+        if (listener != null) {
+            listener.onItemSelected(isAnyItemSelected());
+        }
+    }
+
+    public boolean isAnyItemSelected() {
+        for (GroceriesEntry entry : entries) {
+            if (entry.isSelected()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -69,6 +90,8 @@ public class GroceriesEntryAdapter extends RecyclerView.Adapter<GroceriesEntryAd
                             textViewQuantity.setTextColor(Color.BLACK);
                         }
                     }
+
+                    adapter.notifySelectionChanged();
                 }
             });
         }

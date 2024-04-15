@@ -13,7 +13,7 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class GroceryList extends AppCompatActivity {
+public class GroceryList extends AppCompatActivity implements GroceriesEntryAdapter.OnSelectedItemListener {
     private Button clear;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +21,12 @@ public class GroceryList extends AppCompatActivity {
         setContentView(R.layout.activity_grocery_list);
 
         clear = findViewById(R.id.clear);
+        clear.setEnabled(false);
 
         ArrayList<GroceriesEntry> entries = getGroceryItems();
         RecyclerView recyclerView = findViewById(R.id.recyclerViewGroceries);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new GroceriesEntryAdapter(entries));
+        recyclerView.setAdapter(new GroceriesEntryAdapter(entries, this));
 
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +43,11 @@ public class GroceryList extends AppCompatActivity {
         entries.add(new GroceriesEntry(0, "Tomatoes", "10", false));
 
         return entries;
+    }
+
+    @Override
+    public void onItemSelected(boolean anyItemSelected) {
+        clear.setEnabled(anyItemSelected);
     }
 
     private void showClearConfirmationDialog(ArrayList<GroceriesEntry> entries, RecyclerView recyclerView) {
