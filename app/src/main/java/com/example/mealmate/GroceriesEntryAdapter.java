@@ -1,19 +1,22 @@
 package com.example.mealmate;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class GroceriesEntryAdapter extends RecyclerView.Adapter<GroceriesEntryAdapter.ViewHolder> {
-    private List<GroceriesEntry> entries;
-
-    public GroceriesEntryAdapter(List<GroceriesEntry> entries) {
+    private ArrayList<GroceriesEntry> entries;
+    public GroceriesEntryAdapter(ArrayList<GroceriesEntry> entries) {
         this.entries = entries;
     }
 
@@ -21,13 +24,14 @@ public class GroceriesEntryAdapter extends RecyclerView.Adapter<GroceriesEntryAd
     @Override
     public GroceriesEntryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_grocery_items, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, this);
     }
 
     @Override
     public void onBindViewHolder(@NonNull GroceriesEntryAdapter.ViewHolder holder, int position) {
         GroceriesEntry entry = entries.get(position);
-        holder.textViewGroceryItemName.setText(entry.getItemList());
+        holder.checkBox.setText(entry.getItemList());
+        holder.checkBox.setChecked(entry.isSelected());
         holder.textViewQuantity.setText(entry.getQuantity());
     }
 
@@ -37,13 +41,36 @@ public class GroceriesEntryAdapter extends RecyclerView.Adapter<GroceriesEntryAd
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewGroceryItemName;
         TextView textViewQuantity;
+        CheckBox checkBox;
+        GroceriesEntryAdapter adapter;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, GroceriesEntryAdapter adapter) {
             super(itemView);
-            textViewGroceryItemName = itemView.findViewById(R.id.textViewGroceryItemName);
+            this.adapter = adapter;
+            checkBox = itemView.findViewById(R.id.checkBox);
             textViewQuantity = itemView.findViewById(R.id.textViewQuantity);
+
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            adapter.entries.get(position).setSelected(true);
+                            checkBox.setTextColor(Color.GRAY);
+                            textViewQuantity.setTextColor(Color.GRAY);
+                        }
+                    } else {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            adapter.entries.get(position).setSelected(false);
+                            checkBox.setTextColor(Color.BLACK);
+                            textViewQuantity.setTextColor(Color.BLACK);
+                        }
+                    }
+                }
+            });
         }
     }
 }
