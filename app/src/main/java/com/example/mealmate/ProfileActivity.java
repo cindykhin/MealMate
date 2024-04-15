@@ -184,8 +184,8 @@ public class ProfileActivity extends AppCompatActivity {
             intent = new Intent(ProfileActivity.this, MainActivity.class);
         } else if (itemId == R.id.nav_profile) {
             intent = new Intent(ProfileActivity.this, ProfileActivity.class);
-        } else {
-            // Handle other destinations
+        } else if (itemId == R.id.nav_scanner){
+            intent = new Intent(ProfileActivity.this, ScannerActivity.class);
         }
 
         if (intent != null) {

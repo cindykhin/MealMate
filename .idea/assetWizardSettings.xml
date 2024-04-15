@@ -68,7 +68,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="717171" />
-                                                <entry key="imagePath" value="C:\Users\Michael\AppData\Local\Temp\baseline_emoji_people_24.xml" />
+                                                <entry key="imagePath" value="C:\Users\Michael\AppData\Local\Temp\baseline_adjust_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -79,7 +79,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="file:/$PROJECT_DIR$/../AppData/Local/Android/Sdk/icons/material/materialicons/emoji_people/baseline_emoji_people_24.xml" />
+                                                <entry key="url" value="file:/$PROJECT_DIR$/../AppData/Local/Android/Sdk/icons/material/materialicons/adjust/baseline_adjust_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -91,7 +91,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\Michael\Downloads\mealmate2.png" />
+                                                <entry key="imagePath" value="C:\Users\Michael\Downloads\mealmate.png" />
                                                 <entry key="scalingPercent" value="49" />
                                               </map>
                                             </option>
@@ -125,10 +125,9 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="ff0000" />
-                                      <entry key="backgroundLayerName" value="iconred_background" />
-                                      <entry key="foregroundLayerName" value="iconred_foreground" />
-                                      <entry key="outputName" value="profile" />
+                                      <entry key="backgroundColor" value="ffffff" />
+                                      <entry key="foregroundAssetType" value="CLIP_ART" />
+                                      <entry key="outputName" value="ic_capture" />
                                     </map>
                                   </option>
                                 </PersistentState>

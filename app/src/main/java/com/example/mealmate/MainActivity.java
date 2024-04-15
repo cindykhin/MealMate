@@ -71,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
             intent = new Intent(MainActivity.this, MainActivity.class);
         } else if (itemId == R.id.nav_profile) {
             intent = new Intent(MainActivity.this, ProfileActivity.class);
-        } else {
-            // Handle other destinations
+        } else if (itemId == R.id.nav_scanner){
+            intent = new Intent(MainActivity.this, ScannerActivity.class);
         }
 
         if (intent != null) {
@@ -90,4 +90,5 @@ public class MainActivity extends AppCompatActivity {
         entries.add(new CalorieEntry(2, "Coke", "140"));
         return entries;
     }
+
 }
