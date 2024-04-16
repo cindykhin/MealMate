@@ -39,6 +39,8 @@ public class GroceriesEntryAdapter extends RecyclerView.Adapter<GroceriesEntryAd
         holder.checkBox.setText(entry.getItemList());
         holder.checkBox.setChecked(entry.isSelected());
         holder.textViewQuantity.setText(entry.getQuantity());
+        holder.checkBox.setTextColor(Color.BLACK);
+        holder.textViewQuantity.setTextColor(Color.BLACK);
     }
 
     @Override

@@ -30,9 +30,22 @@ public class GroceryList extends AppCompatActivity implements GroceriesEntryAdap
         setContentView(R.layout.activity_grocery_list);
 
         clear = findViewById(R.id.clear);
-        clear.setEnabled(false);
 
-        ArrayList<GroceriesEntry> entries = getGroceryItems();
+        ArrayList<GroceriesEntry> entries;
+
+        Intent intent = getIntent();
+
+        if (intent.hasExtra("items") && intent.hasExtra("qty")) {
+            Bundle extras = intent.getExtras();
+
+            ArrayList<String> item = extras.getStringArrayList("items");
+            ArrayList<String> qty = extras.getStringArrayList("qty");
+
+            entries = getGroceryItemsCookies(item, qty);
+        } else {
+            entries = getGroceryItems();
+        }
+
         RecyclerView recyclerView = findViewById(R.id.recyclerViewGroceries);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new GroceriesEntryAdapter(entries, this));
@@ -56,6 +69,8 @@ public class GroceryList extends AppCompatActivity implements GroceriesEntryAdap
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this::onNavigationItemSelected);
 
+        clear.setEnabled(false);
+
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +83,25 @@ public class GroceryList extends AppCompatActivity implements GroceriesEntryAdap
         ArrayList<GroceriesEntry> entries = new ArrayList<>();
         entries.add(new GroceriesEntry(0, "Potatoes", "1 bag", false));
         entries.add(new GroceriesEntry(1, "Eggs", "1 dozen", false));
-        entries.add(new GroceriesEntry(0, "Tomatoes", "10", false));
+        entries.add(new GroceriesEntry(2, "Tomatoes", "10", false));
+
+        return entries;
+    }
+
+    private ArrayList<GroceriesEntry> getGroceryItemsCookies(ArrayList<String> item, ArrayList<String> qty) {
+        ArrayList<GroceriesEntry> entries = new ArrayList<>();
+        entries.add(new GroceriesEntry(0, "Potatoes", "1 bag", false));
+        entries.add(new GroceriesEntry(1, "Eggs", "1 dozen", false));
+        entries.add(new GroceriesEntry(2, "Tomatoes", "10", false));
+
+        if (item.isEmpty() == false && qty.isEmpty() == false) {
+            int listSize = entries.size();
+
+            for (int i = 0; i < item.size(); i++) {
+                entries.add(new GroceriesEntry(listSize, item.get(i), qty.get(i), false));
+                listSize++;
+            }
+        }
 
         return entries;
     }
