@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
             intent = new Intent(MainActivity.this, ProfileActivity.class);
         } else if (itemId == R.id.nav_scanner){
             intent = new Intent(MainActivity.this, ScannerActivity.class);
+        }else if (itemId == R.id.nav_list){
+            intent = new Intent(MainActivity.this, GroceryList.class);
         }
 
         if (intent != null) {

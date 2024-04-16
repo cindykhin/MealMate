@@ -186,6 +186,8 @@ public class ProfileActivity extends AppCompatActivity {
             intent = new Intent(ProfileActivity.this, ProfileActivity.class);
         } else if (itemId == R.id.nav_scanner){
             intent = new Intent(ProfileActivity.this, ScannerActivity.class);
+        }else if (itemId == R.id.nav_list){
+            intent = new Intent(ProfileActivity.this, GroceryList.class);
         }
 
         if (intent != null) {

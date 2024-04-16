@@ -230,6 +230,8 @@ public class ScannerActivity extends AppCompatActivity {
             intent = new Intent(ScannerActivity.this, ProfileActivity.class);
         } else if (itemId == R.id.nav_scanner){
             intent = new Intent(ScannerActivity.this, ScannerActivity.class);
+        }else if (itemId == R.id.nav_list){
+            intent = new Intent(ScannerActivity.this, GroceryList.class);
         }
 
         if (intent != null) {
