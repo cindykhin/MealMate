@@ -47,6 +47,7 @@ public class ChocolateChipCookies extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this::onNavigationItemSelected);
 
+        // On click, send items to grocery list
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
