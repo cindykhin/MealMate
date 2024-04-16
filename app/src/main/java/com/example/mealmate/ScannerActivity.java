@@ -232,6 +232,8 @@ public class ScannerActivity extends AppCompatActivity {
             intent = new Intent(ScannerActivity.this, ScannerActivity.class);
         }else if (itemId == R.id.nav_list){
             intent = new Intent(ScannerActivity.this, GroceryList.class);
+        }else if (itemId == R.id.nav_recipes){
+            intent = new Intent(ScannerActivity.this, RecipeList.class);
         }
 
         if (intent != null) {

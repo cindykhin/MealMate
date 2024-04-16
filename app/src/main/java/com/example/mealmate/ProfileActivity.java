@@ -188,6 +188,8 @@ public class ProfileActivity extends AppCompatActivity {
             intent = new Intent(ProfileActivity.this, ScannerActivity.class);
         }else if (itemId == R.id.nav_list){
             intent = new Intent(ProfileActivity.this, GroceryList.class);
+        }else if (itemId == R.id.nav_recipes){
+            intent = new Intent(ProfileActivity.this, RecipeList.class);
         }
 
         if (intent != null) {

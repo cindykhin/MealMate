@@ -106,6 +106,8 @@ public class ChocolateChipCookies extends AppCompatActivity {
             intent = new Intent(ChocolateChipCookies.this, ScannerActivity.class);
         }else if (itemId == R.id.nav_list){
             intent = new Intent(ChocolateChipCookies.this, GroceryList.class);
+        }else if (itemId == R.id.nav_recipes){
+            intent = new Intent(ChocolateChipCookies.this, RecipeList.class);
         }
 
         if (intent != null) {

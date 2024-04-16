@@ -81,9 +81,9 @@ public class GroceryList extends AppCompatActivity implements GroceriesEntryAdap
 
     private ArrayList<GroceriesEntry> getGroceryItems() {
         ArrayList<GroceriesEntry> entries = new ArrayList<>();
-        entries.add(new GroceriesEntry(0, "Potatoes", "1 bag", false));
-        entries.add(new GroceriesEntry(1, "Eggs", "1 dozen", false));
-        entries.add(new GroceriesEntry(2, "Tomatoes", "10", false));
+//        entries.add(new GroceriesEntry(0, "Potatoes", "1 bag", false));
+//        entries.add(new GroceriesEntry(1, "Eggs", "1 dozen", false));
+//        entries.add(new GroceriesEntry(2, "Tomatoes", "10", false));
 
         return entries;
     }
@@ -141,6 +141,8 @@ public class GroceryList extends AppCompatActivity implements GroceriesEntryAdap
             intent = new Intent(GroceryList.this, ScannerActivity.class);
         }else if (itemId == R.id.nav_list){
             intent = new Intent(GroceryList.this, GroceryList.class);
+        }else if (itemId == R.id.nav_recipes){
+            intent = new Intent(GroceryList.this, RecipeList.class);
         }
 
         if (intent != null) {

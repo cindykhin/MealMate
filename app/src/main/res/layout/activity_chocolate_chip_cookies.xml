@@ -29,55 +29,73 @@
             style = "@style/AppTheme.Toolbar"/>
 
         <TextView
-            android:id="@+id/ingredients"
-            android:layout_width="353dp"
-            android:layout_height="338dp"
-            android:layout_marginTop="104dp"
-            android:text="Ingredients:\n\n- 1 cup (2 sticks) unsalted butter, softened\n\n- 3/4 cup granulated sugar\n\n- 3/4 cup packed brown sugar\n\n- 2 large eggs\n\n- 1 teaspoon vanilla extract\n\n- 2 1/4 cups all-purpose flour\n\n- 1 teaspoon baking soda\n\n- 1/2 teaspoon salt\n\n- 2 cups semi-sweet chocolate chips"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/steps"
-            android:layout_width="350dp"
-            android:layout_height="458dp"
-            android:layout_marginTop="16dp"
-            android:text="Steps:\n\n1. Preheat your oven to 375°F (190°C). Line baking sheets with parchment paper or silicone baking mats.\n\n2. In a large bowl, cream together the softened butter, granulated sugar, and brown sugar until smooth and creamy. Beat in the eggs one at a time, then stir in the vanilla extract.\n\n3. In a separate bowl, whisk together the flour, baking soda, and salt. Gradually add the dry ingredients to the wet ingredients, mixing until well combined.\n\n4. Stir in the chocolate chips until evenly distributed throughout the dough.\n\n5. Drop rounded tablespoons of dough onto the prepared baking sheets, leaving some space between each cookie.\n\n6. Bake in the preheated oven for 8 to 10 minutes, or until the edges are lightly golden brown.\n\n7. Allow the cookies to cool on the baking sheets for a few minutes before transferring them to wire racks to cool completely."
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ingredients" />
-
-
-        <TextView
             android:id="@+id/recipeName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chocolate Chip Cookies"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.158"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="322dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textAlignment="center"
-            android:text="CHOCOLATE CHIP COOKIES"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
-            app:layout_constraintVertical_bias="0.5"
-            app:layout_constraintHorizontal_bias="0.5"
-            tools:layout_editor_absoluteX="117dp"
-            android:textSize="20dp"/>
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="#A3A3A3"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintTop_toBottomOf="@id/recipeName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/button">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/ingredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="Ingredients:\n\n- 1 cup (2 sticks) unsalted butter, softened\n\n- 3/4 cup granulated sugar\n\n- 3/4 cup packed brown sugar\n\n- 2 large eggs\n\n- 1 teaspoon vanilla extract\n\n- 2 1/4 cups all-purpose flour\n\n- 1 teaspoon baking soda\n\n- 1/2 teaspoon salt\n\n- 2 cups semi-sweet chocolate chips" />
+
+                <TextView
+                    android:id="@+id/steps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="Steps:\n\n1. Preheat your oven to 375°F (190°C). Line baking sheets with parchment paper or silicone baking mats.\n\n2. In a large bowl, cream together the softened butter, granulated sugar, and brown sugar until smooth and creamy. Beat in the eggs one at a time, then stir in the vanilla extract.\n\n3. In a separate bowl, whisk together the flour, baking soda, and salt. Gradually add the dry ingredients to the wet ingredients, mixing until well combined.\n\n4. Stir in the chocolate chips until evenly distributed throughout the dough.\n\n5. Drop rounded tablespoons of dough onto the prepared baking sheets, leaving some space between each cookie.\n\n6. Bake in the preheated oven for 8 to 10 minutes, or until the edges are lightly golden brown.\n\n7. Allow the cookies to cool on the baking sheets for a few minutes before transferring them to wire racks to cool completely." />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
             android:text="Add ingredients to Grocery List"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="0.5"
             app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardView"
+
             android:background="@color/colorPrimaryDark"
             android:textColor="@color/white"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"/>
 
 
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/steps" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

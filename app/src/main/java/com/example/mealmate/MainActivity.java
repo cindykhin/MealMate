@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
             intent = new Intent(MainActivity.this, ScannerActivity.class);
         }else if (itemId == R.id.nav_list){
             intent = new Intent(MainActivity.this, GroceryList.class);
+        }else if (itemId == R.id.nav_recipes){
+            intent = new Intent(MainActivity.this, RecipeList.class);
         }
 
         if (intent != null) {
