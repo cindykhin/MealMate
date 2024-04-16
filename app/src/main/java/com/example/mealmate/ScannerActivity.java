@@ -13,6 +13,7 @@ import androidx.camera.core.Preview;
 import androidx.camera.extensions.HdrImageCaptureExtender;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -28,9 +29,12 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.navigation.NavigationView;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.File;
@@ -71,15 +75,28 @@ public class ScannerActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         toolbar.setNavigationIcon(R.drawable.ic_menu_white);
 
+        // Set up the NavigationView
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this::onNavigationItemSelected);
+
         if(allPermissionsGranted()){
             startCamera(); //start camera if permission has been granted by user
         } else{
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
         mPreviewView = findViewById(R.id.camera);
-        captureImage = findViewById(R.id.captureImg);
 
+        // Find your scan button
+        CardView scanButton = findViewById(R.id.capture);
 
+        // Set OnClickListener for the scan button
+        scanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Call the method to show the nutrition information dialog
+                showNutritionInfoDialog();
+            }
+        });
 
     }
     private void startCamera() {
@@ -127,48 +144,9 @@ public class ScannerActivity extends AppCompatActivity {
 
         final ImageCapture imageCapture = builder
                 .setTargetRotation(this.getWindowManager().getDefaultDisplay().getRotation())
-                .build();preview.setSurfaceProvider(mPreviewView.createSurfaceProvider());
-                Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector, preview, imageAnalysis, imageCapture);
-
-
-
-        captureImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
-                File file = new File(getBatchDirectoryName(), mDateFormat.format(new Date())+ ".jpg");
-
-                ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions.Builder(file).build();
-                imageCapture.takePicture(outputFileOptions, executor, new ImageCapture.OnImageSavedCallback () {
-                    @Override
-                    public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
-                        new Handler().post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(ScannerActivity.this, "Image Saved successfully", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                    @Override
-                    public void onError(@NonNull ImageCaptureException error) {
-                        error.printStackTrace();
-                    }
-                });
-            }
-        });
-    }
-
-    public String getBatchDirectoryName() {
-
-        String app_folder_path = "";
-        app_folder_path = Environment.getExternalStorageDirectory().toString() + "/images";
-        File dir = new File(app_folder_path);
-        if (!dir.exists() && !dir.mkdirs()) {
-
-        }
-
-        return app_folder_path;
+                .build();
+        preview.setSurfaceProvider(mPreviewView.createSurfaceProvider());
+        Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, preview, imageAnalysis, imageCapture);
     }
 
     private boolean allPermissionsGranted(){
@@ -220,6 +198,26 @@ public class ScannerActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggles
         toggle.onConfigurationChanged(newConfig);
+    }
+
+    // Inside your activity or fragment where you handle the scan button press event
+
+    // Declare a BottomSheetDialog variable
+    BottomSheetDialog bottomSheetDialog;
+
+    // Method to show nutrition information dialog
+    private void showNutritionInfoDialog() {
+        // Create a BottomSheetDialog instance
+        bottomSheetDialog = new BottomSheetDialog(this);
+
+        // Inflate the nutrition information layout
+        View view = getLayoutInflater().inflate(R.layout.nutrition_info_layout, null);
+
+        // Set the inflated view to the dialog
+        bottomSheetDialog.setContentView(view);
+
+        // Show the dialog
+        bottomSheetDialog.show();
     }
 
     private boolean onNavigationItemSelected(MenuItem item) {
