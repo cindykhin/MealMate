@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimaryDark">#FF0000</color> <!-- Change this color to the desired status bar color -->
+    <color name="ic_launcher_background">#FF0000</color>
+
 </resources>
